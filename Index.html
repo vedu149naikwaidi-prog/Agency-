@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelCraft | Digital Agency</title>
+    <meta name="description" content="We turn clicks into clients with stunning landing pages, video editing, photo editing, and social media management.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            600: '#475569',
+                        },
+                        pastel: {
+                            pink: '#f5d0fe',
+                            purple: '#e9d5ff',
+                            blue: '#c7d2fe',
+                            teal: '#99f6e4',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-in',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: scale(1.03);
+        }
+        .instagram-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .instagram-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        [data-aos] {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        [data-aos="fade-up"] {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        [data-aos="fade-up"].aos-animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        [data-aos="fade-left"] {
+            transform: translateX(50px);
+            opacity: 0;
+        }
+        [data-aos="fade-left"].aos-animate {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        [data-aos="fade-right"] {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+        [data-aos="fade-right"].aos-animate {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-90 backdrop-blur-md z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold font-heading bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">PixelCraft</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#services" class="text-gray-700 hover:text-primary-600 font-medium transition">Services</a>
+                        <a href="#portfolio" class="text-gray-700 hover:text-primary-600 font-medium transition">Portfolio</a>
+                        <a href="#why-us" class="text-gray-700 hover:text-primary-600 font-medium transition">Why Us</a>
+                        <a href="#testimonials" class="text-gray-700 hover:text-primary-600 font-medium transition">Testimonials</a>
+                        <a href="#contact" class="bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition">Get Started</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-700 hover:text-primary-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Services</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Portfolio</a>
+                <a href="#why-us" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Why Us</a>
+                <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary-600 hover:bg-primary-700">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-pastel-blue to-pastel-purple opacity-30"></div>
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-woman-using-her-phone-39839-large.mp4" type="video/mp4">
+        </video>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="md:w-2/3 lg:w-1/2" data-aos="fade-up">
+                <h1 class="text-4xl md:text-6xl font-bold font-heading leading-tight mb-6">
+                    We Turn <span class="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">Clicks Into Clients.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-700 mb-8">
+                    From scroll-stopping edits to stunning landing pages — we grow brands digitally.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://www.instagram.com/pixelcraft_01/" target="_blank" class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition flex items-center justify-center gap-2">
+                        <i class="fab fa-instagram"></i> DM us on Instagram – @pixelcraft_01
+                    </a>
+                    <a href="#services" class="border border-gray-300 hover:border-primary-500 text-gray-700 hover:text-primary-600 font-medium py-3 px-6 rounded-lg transition flex items-center justify-center gap-2">
+                        <i class="fas fa-eye"></i> View Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Our <span class="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">Services</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">We offer comprehensive digital solutions to elevate your brand's online presence.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-primary-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop-code text-2xl text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">Landing Page Design</h3>
+                    <p class="text-gray-600">"Websites that sell, not just look pretty."</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-film text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">Video Editing</h3>
+                    <p class="text-gray-600">"From raw clips to viral edits."</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-pink-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-camera-retro text-2xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">Photo Editing</h3>
+                    <p class="text-gray-600">"Brand visuals that stand out."</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-teal-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-hashtag text-2xl text-teal-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">Social Media Management</h3>
+                    <p class="text-gray-600">"You grow your business, we grow your page."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Our <span class="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">Portfolio</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">See our recent work that helped brands grow their digital presence.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Portfolio Item 1 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Landing Page Design" class="w-full h-64 object-cover transition duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white">
+                        <h3 class="text-xl font-bold font-heading">E-commerce Landing Page</h3>
+                        <p class="text-primary-200">Increased conversions by 120%</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Video Editing" class="w-full h-64 object-cover transition duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white">
+                        <h3 class="text-xl font-bold font-heading">Product Promo Video</h3>
+                        <p class="text-primary-200">2M+ views on social media</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Social Media" class="w-full h-64 object-cover transition duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white">
+                        <h3 class="text-xl font-bold font-heading">Social Media Campaign</h3>
+                        <p class="text-primary-200">50K new followers in 30 days</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up">
+                <a href="https://www.instagram.com/pixelcraft_01/" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary-600 hover:bg-primary-700 transition">
+                    See More on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Why <span class="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">Choose Us</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">We're not just another digital agency. Here's what sets us apart.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Reason 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-primary-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-palette text-2xl text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">100% Custom Designs</h3>
+                    <p class="text-gray-600">No templates. Every project is uniquely crafted for your brand.</p>
+                </div>
+                
+                <!-- Reason 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">Fast Turnaround</h3>
+                    <p class="text-gray-600">Most projects delivered in 24-72 hours. We value your time.</p>
+                </div>
+                
+                <!-- Reason 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-pink-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-2xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">For Creators & Brands</h3>
+                    <p class="text-gray-600">We specialize in working with influencers, startups, and businesses.</p>
+                </div>
+                
+                <!-- Reason 4 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-teal-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-teal-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3">Results-Driven</h3>
+                    <p class="text-gray-600">We focus on metrics that matter: reach, clicks, and growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Client <span class="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">Testimonials</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Don't just take our word for it. Here's what our clients say.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J." class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Sarah J.</h4>
+                            <p class="text-gray-500 text-sm">Founder, Glow Skincare</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"PixelCraft transformed our landing page and increased our conversion rate by 80% in just one month. Their attention to detail is unmatched!"</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T." class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Michael T.</h4>
+                            <p class="text-gray-500 text-sm">Content Creator</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"The video edits I received went viral on TikTok with over 5M views. PixelCraft understands exactly what makes content engaging."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 (DM Screenshot mockup) -->
+                <div class="testimonial-card bg-gray-800 p-6 rounded-xl shadow-md text-white" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-gray-700 p-4 rounded-lg mb-4">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-600 mr-3"></div>
+                            <div class="w-24 h-3 rounded bg-gray-600"></div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="w-full h-4 rounded bg-gray-600"></div>
+                            <div class="w-3/4 h-4 rounded bg-gray-600"></div>
+                            <div class="w-1/2 h-4 rounded bg-gray-600"></div>
+                        </div>
+                        <div class="mt-4 ml-8 p-3 bg-primary-600 rounded-lg">
+                            <p class="text-sm">"Just wanted to say our Instagram growth has been insane since you took over! +15K followers this month!"</p>
+                        </div>
+                    </div>
+                    <p class="text-primary-200 text-sm">Real client DM from @happyclient</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16 bg-gradient-to-br from-primary-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Custom Pricing for Every Client</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">We craft a custom quote for each client based on needs.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Pricing Card 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold font-heading mb-4">Basic Package</h3>
+                    <div class="text-4xl font-bold mb-6">$299<span class="text-lg font-normal text-gray-500">/project</span></div>
+                    <ul class="space-y-3 text-gray-600 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Single Landing Page</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> 3 Revisions</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> 48-72 Hour Delivery</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Mobile Responsive</li>
+                    </ul>
+                </div>
+                
+                <!-- Pricing Card 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md transform md:scale-105 relative" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 right-0 bg-primary-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                    <h3 class="text-xl font-bold font-heading mb-4">Pro Package</h3>
+                    <div class="text-4xl font-bold mb-6">$599<span class="text-lg font-normal text-gray-500">/project</span></div>
+                    <ul class="space-y-3 text-gray-600 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Multi-Page Website</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Unlimited Revisions</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> 24-48 Hour Delivery</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> SEO Optimized</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Contact Form Integration</li>
+                    </ul>
+                </div>
+                
+                <!-- Pricing Card 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold font-heading mb-4">Custom Solution</h3>
+                    <div class="text-4xl font-bold mb-6">Custom</div>
+                    <ul class="space-y-3 text-gray-600 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Tailored to Your Needs</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Ongoing Support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Priority Delivery</li>
+                        <li class="flex items-center"><i class="fas fa-check text-primary-600 mr-2"></i> Full Brand Package</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-aos="fade-up">
+                <a href="https://www.instagram.com/pixelcraft_01/" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary-600 hover:bg-primary-700 transition">
+                    <i class="fab fa-instagram mr-2"></i> DM us on Instagram – @pixelcraft_01
+                </a>
+                <p class="mt-4 text-gray-600">All packages include a free consultation to discuss your project needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+                <div class="mb-12 lg:mb-0" data-aos="fade-right">
+                    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Let's Build Something <span class="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">Amazing</span></h2>
+                    <p class="text-lg text-gray-600 mb-8">Ready to elevate your digital presence? Fill out the form or DM us directly on Instagram.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                                    <i class="fas fa-envelope text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Email Us</h3>
+                                <p class="text-gray-600">thevedant14@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                                    <i class="fab fa-instagram text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">DM on Instagram</h3>
+                                <p class="text-gray-600">@pixelcraft_01</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                                    <i class="fas fa-clock text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Response Time</h3>
+                                <p class="text-gray-600">Typically within 2-4 hours during business days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-3 px-4 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-3 px-4 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        
+                        <div>
+                            <label for="instagram" class="block text-sm font-medium text-gray-700">Instagram Handle</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500">@</span>
+                                <input type="text" id="instagram" name="instagram" class="flex-1 min-w-0 block w-full px-3 py-3 rounded-none rounded-r-md border border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-gray-700">Services Needed</label>
+                            <select id="service" name="service" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-3 px-4 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                                <option>Select a service</option>
+                                <option>Landing Page Design</option>
+                                <option>Video Editing</option>
+                                <option>Photo Editing</option>
+                                <option>Social Media Management</option>
+                                <option>Multiple Services</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Tell Us About Your Project</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-3 px-4 focus:outline-none focus:ring-primary-500 focus:border-primary-500"></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition">
+                                Let's Build Something Amazing
+                            </button>
+                        </div>
+                        
+                        <p class="text-center text-gray-500 text-sm">
+                            Or DM us directly on <a href="https://www.instagram.com/pixelcraft_01/" target="_blank" class="text-primary-600 hover:text-primary-700 font-medium">@pixelcraft_01</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold font-heading mb-4 bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">PixelCraft</h3>
+                    <p class="text-gray-400 mb-6">We turn clicks into clients with stunning digital solutions that drive growth and engagement.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/pixelcraft_01/" target="_blank" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Landing Page Design</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Video Editing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Photo Editing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Social Media Management</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Our Services</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition">Portfolio</a></li>
+                        <li><a href="#why-us" class="text-gray-400 hover:text-white transition">Why Choose Us</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 PixelCraft Digital Agency. All rights reserved.</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm mr-4">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Instagram Button -->
+    <a href="https://www.instagram.com/pixelcraft_01/" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white shadow-lg instagram-btn z-50">
+        <i class="fab fa-instagram text-2xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Simple scroll animation implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            const aosElements = document.querySelectorAll('[data-aos]');
+            
+            function checkScroll() {
+                aosElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('aos-animate');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        });
+    </script>
+</body>
+</html>
